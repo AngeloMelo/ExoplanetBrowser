@@ -6,7 +6,7 @@ maintains a publicly accessible archive of the data collected available by API.
 
 This application allows users to easily search and get data from Exoplanets provided by the Nasa Exoplanet Science Institute.
 
-This is an app suggestion from [App Ideas](https://github.com/florinpop17/app-ideas) implemented with the  MERN stack. It uses a Mongodb database to store data fetched dayly from the Nasa Exoplanet Archive API (https://exoplanetarchive.ipac.caltech.edu/docs/API_queries.html), to speed up the user queries.
+This is an app suggestion from [App Ideas](https://github.com/florinpop17/app-ideas) implemented with the  MERN stack. It uses a Mongodb database to store data fetched dayly from the Nasa Exoplanet Archive API to speed up the user queries.
 
 ## 3d party documentation
 

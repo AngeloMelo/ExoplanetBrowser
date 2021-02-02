@@ -1,0 +1,31 @@
+{
+  "name": "exoplanet-browser",
+  "version": "1.0.0",
+  "description": "A MERN application for browsing exoplanets using cached data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "startdev": "nodemon server.js",
+    "client": "npm start --prefix frontend",
+    "dep": "yarn && yarn start && yarn --prefix frontend && yarn run build --prefix frontend",
+    "dev": "concurrently \" npm run startdev\" \"npm run client\""
+  },
+  "author": "Angelo Melo",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.13",
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "keywords": [
+    "MERN",
+    "React",
+    "MongoDB"
+  ]
+}

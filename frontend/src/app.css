@@ -1,0 +1,15 @@
+.section{
+    margin-top: 1em;
+}
+
+.pagination-item-disabled{
+    background-color: #375a7f;
+}
+
+.o-page-item{
+    min-width: 33px;
+}
+
+.pagination-item-active{
+    background-color: #3498db;
+}
