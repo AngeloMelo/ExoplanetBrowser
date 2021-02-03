@@ -1,143 +1,97 @@
 import React from 'react'
 
-const DetailsContainer = ({planetData}) => {
-
-    if(!planetData) return (<></>)
+const DetailsContainer = ({planetDetails, closeDetails}) => {
     
-    const planetName = "Jupiter"
+    const getFormatedRangeField = (fieldValue, upperValue, lowerValue, unit) =>{
+        
+        if(!(fieldValue && upperValue && lowerValue)) return "N/A"
+
+        if (upperValue === (-1)*lowerValue) return `${fieldValue} ± ${upperValue} ${unit}`
+        
+        return (<div>
+            <span className="supersubNumber">{fieldValue}</span>
+            <span className="superscript">+{upperValue}</span>
+            <span className="subscript">{lowerValue}</span>
+            <span className="supersubNumber">{unit}</span>
+        </div>)        
+    }
+
+    const rowupdate = new Date(planetDetails.rowupdate).toLocaleDateString()
+    const isTtv = planetDetails.pl_ttvflag === 1
+    const isKepler = planetDetails.pl_kepflag === 1
+    const isK2 = planetDetails.pl_k2flag === 1
     return (
         <div className="container section">
             <div className="jumbotron">
-                <legend>Planet Details</legend>
+                <legend><p className="text-success">General details</p></legend>
                 <div className="row">
-                    <div className="col-md-4">Host Name:</div>
-                    <div className="col-md-4">Planet Letter</div>
-                    <div className="col-md-4">Planet Name</div>
+                    <div className="col-md-4">Host Name: <p className="text-success">{planetDetails.pl_hostname}</p></div>
+                    <div className="col-md-4">Planet Letter: <p className="text-success">{planetDetails.pl_letter}</p></div>
+                    <div className="col-md-4">Planet Name: <p className="text-success">{planetDetails.pl_name}</p></div>
                 </div>
                 <div className="row">
-                    <div className="col-md-4">Discovery Method:</div>
-                    <div className="col-md-4">Is Controversial:</div>
-                    <div className="col-md-4">Number of Planets in System</div>
+                    <div className="col-md-4">Discovery Method: <p className="text-success">{planetDetails.pl_discmethod}</p></div>
+                    <div className="col-md-4">Is Controversial: <p className="text-success">{planetDetails.pl_controvflag}</p></div>
+                    <div className="col-md-4">Number of Planets in System: <p className="text-success">{planetDetails.pl_pnum}</p></div>
                 </div>
                 <div className="row">
-                    <div className="col-md-4">Date of Last Update:</div>
-                    <div className="col-md-4">Discovery Facility:</div>
-                    <div className="col-md-4">Number of Notes</div>
-                </div>
+                    <div className="col-md-4">Date of Last Update: <p className="text-success">{rowupdate}</p></div>
+                    <div className="col-md-4">Discovery Facility: <p className="text-success">{planetDetails.pl_facility}</p></div>
+                    <div className="col-md-4">Number of Notes: <p className="text-success">{planetDetails.pl_nnotes}</p></div>
+                    </div>
                 <div className="row">
-                    <div className="col-md-4">TTV Flag:</div>
-                    <div className="col-md-4">Kepler Field Flag:</div>
-                    <div className="col-md-4">K2 Mission Flag</div>
-                </div>
-                <hr className="my-4"/>
-                <h4>Orbital Details</h4>
-                <div className="row">
-                    <div className="col-md-3">Orbital Period [days]</div>
-                    <div className="col-md-3">Upper Unc. [days]</div>
-                    <div className="col-md-3">Lower Unc. [days]</div>
-                    <div className="col-md-3">Limit Flag</div>
-                </div>
-                <div className="row">
-                    <div className="col-md-3">Orbit Semi-Major Axis [au]</div>
-                    <div className="col-md-3">Upper Unc. [au]</div>
-                    <div className="col-md-3">Lower Unc. [au]</div>
-                    <div className="col-md-3">Limit Flag</div>
-                </div>
-                <div className="row">
-                    <div className="col-md-3">Eccentricity</div>
-                    <div className="col-md-3">Upper Unc.</div>
-                    <div className="col-md-3">Lower Unc.</div>
-                    <div className="col-md-3">Limit Flag</div>
-                </div>
-                <div className="row">
-                    <div className="col-md-3">Inclination [deg]</div>
-                    <div className="col-md-3">Upper Unc. [deg]</div>
-                    <div className="col-md-3">Lower Unc. [deg]</div>
-                    <div className="col-md-3">Limit Flag</div>
+                    <div className="col-md-4">
+                        { isTtv && <span class="badge badge-pill badge-info">TTV</span>}
+                        { isKepler && <span class="badge badge-pill badge-info">Kepler Field</span>}
+                        { isK2 && <span class="badge badge-pill badge-info">K2 Mission</span>}
+                    </div>
                 </div>
                 <hr className="my-4"/>
-                <h4>Stellar Details</h4>
+                <h4><p className="text-info">Orbital Details</p></h4>
                 <div className="row">
-                    <div className="col-md-3">Stellar Mass [Solar mass]</div>
-                    <div className="col-md-3">Upper Unc. [Solar mass]</div>
-                    <div className="col-md-3">Lower Unc. [Solar mass]</div>
-                    <div className="col-md-3">Limit Flag</div>
+                    <div className="col-md-3">Orbital Period: <p className="text-info">{getFormatedRangeField(planetDetails.pl_orbper, planetDetails.pl_orbpererr1, planetDetails.pl_orbpererr2, 'days')}</p></div>
+                    <div className="col-md-3">Orbit Semi-Major Axis: <p className="text-info">{getFormatedRangeField(planetDetails.pl_orbsmax, planetDetails.pl_orbsmaxerr1, planetDetails.pl_orbsmaxerr2, 'au')}</p></div>
+                    <div className="col-md-3">Eccentricity: <p className="text-info">{getFormatedRangeField(planetDetails.pl_orbeccen, planetDetails.pl_orbeccenerr1, planetDetails.pl_orbeccenerr2, '')}</p></div>
+                    <div className="col-md-3">Inclination: <p className="text-info">{getFormatedRangeField(planetDetails.pl_orbincl, planetDetails.pl_orbinclerr1, planetDetails.pl_orbinclerr2, 'deg')}</p></div>
                 </div>
-                <div className="row">
-                    <div className="col-md-3">Stellar Radius [Solar radii]</div>
-                    <div className="col-md-3">Upper Unc. [Solar radii]</div>
-                    <div className="col-md-3">Lower Unc. [Solar radii]</div>
-                    <div className="col-md-3">Limit Flag</div>
-                </div>
-                <div className="row">
-                    <div className="col-md-3">Eccentricity</div>
-                    <div className="col-md-3">Eccentricity Upper Unc.</div>
-                    <div className="col-md-3">Eccentricity Lower Unc.</div>
-                    <div className="col-md-3">Eccentricity Limit Flag</div>
-                </div>
-                <div className="row">
-                    <div className="col-md-3">Inclination [deg]</div>
-                    <div className="col-md-3">Inclination Upper Unc. [deg]</div>
-                    <div className="col-md-3">Inclination Lower Unc. [deg]</div>
-                    <div className="col-md-3">Inclination Limit Flag</div>
-                </div>
-                    
                 <hr className="my-4"/>
-                <h4>Details</h4>
+                <h4><p className="text-warning">Other details</p></h4>
                 <div className="row">
-                    <div className="col-md-2">Planet Mass or M*sin(i) [Jupiter mass]</div>
-                    <div className="col-md-2">Upper Unc. [Jupiter mass]</div>
-                    <div className="col-md-2">Lower Unc. [Jupiter mass]</div>
-                    <div className="col-md-2">Limit Flag</div>
-                    <div className="col-md-2">Provenance</div>
-                    <div className="col-md-2">&nbsp;</div>
+                    <div className="col-md-3">Stellar Mass [Solar mass]: <p className="text-warning">{getFormatedRangeField(planetDetails.st_mass, planetDetails.st_masserr1, planetDetails.st_masserr2, '')}</p></div>
+                    <div className="col-md-3">Stellar Radius [Solar radii]:<p className="text-warning">{getFormatedRangeField(planetDetails.st_rad, planetDetails.st_raderr1, planetDetails.st_raderr2, '')}</p></div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3">Planet Radius [Jupiter radii]</div>
-                    <div className="col-md-3">Upper Unc. [Jupiter radii]</div>
-                    <div className="col-md-3">Lower Unc. [Jupiter radii]</div>
-                    <div className="col-md-3">Limit Flag</div>
+                    <div className="col-md-3">Planet Mass or M*sin(i):<p className="text-warning">{getFormatedRangeField(planetDetails.pl_bmassj, planetDetails.pl_bmassjerr1, planetDetails.pl_bmassjerr2, 'Jupiter mass')}</p></div>
+                    <div className="col-md-3">Provenance:<p className="text-warning">{planetDetails.pl_bmassprov}</p></div>
+                    <div className="col-md-3">Planet Radius:<p className="text-warning">{getFormatedRangeField(planetDetails.pl_radj, planetDetails.pl_radjerr1, planetDetails.pl_radjerr2,'Jupiter radii')}</p></div>
+                    <div className="col-md-3">Planet Density:<p className="text-warning">{getFormatedRangeField(planetDetails.pl_dens, planetDetails.pl_denserr1, planetDetails.pl_denserr2,'g/cm**3')}</p></div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3">Planet Density [g/cm**3]</div>
-                    <div className="col-md-3">Upper Unc. [g/cm**3]</div>
-                    <div className="col-md-3">Lower Unc. [g/cm**3]</div>
-                    <div className="col-md-3">Limit Flag</div>
+                    <div className="col-md-3">RA [sexagesimal]:<p className="text-warning">{planetDetails.ra_str}</p></div>
+                    <div className="col-md-3">RA [decimal degrees]:<p className="text-warning">{planetDetails.ra}</p></div>
+                    <div className="col-md-3">Dec [sexagesimal]:<p className="text-warning">{planetDetails.dec_str}</p></div>
+                    <div className="col-md-3">Dec [decimal degrees]:<p className="text-warning">{planetDetails.dec}</p></div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3">RA [sexagesimal]</div>
-                    <div className="col-md-3">RA [decimal degrees]</div>
-                    <div className="col-md-3">Dec [sexagesimal]</div>
-                    <div className="col-md-3">Dec [decimal degrees]</div>
+                    <div className="col-md-3">Distance:<p className="text-warning">{getFormatedRangeField(planetDetails.st_dist, planetDetails.st_disterr1, planetDetails.st_disterr2,'pc')}</p></div>
+                    <div className="col-md-3">Gaia Distance:<p className="text-warning">{getFormatedRangeField(planetDetails.gaia_dist, planetDetails.gaia_disterr1, planetDetails.gaia_disterr2,'pc')}</p></div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3">Distance [pc]</div>
-                    <div className="col-md-3">Upper Unc. [pc]</div>
-                    <div className="col-md-3">Lower Unc. [pc]</div>
-                    <div className="col-md-3">Limit Flag</div>
+                    <div className="col-md-3">Optical Magnitude :<p className="text-warning">{planetDetails.st_optmag} mag</p></div>
+                    <div className="col-md-3">Optical Magnitude Unc.:<p className="text-warning">{planetDetails.st_optmagerr ? planetDetails.st_optmagerr + ' mag' : 'N/A'}</p></div>
+                </div>
+                <div className="row">   
+                    <div className="col-md-3">Band:<p className="text-warning">{planetDetails.st_optband ? planetDetails.st_optband : 'N/A'}</p></div>
+                    <div className="col-md-3">G-band (Gaia):<p className="text-warning">{planetDetails.gaia_gmag ? planetDetails.gaia_gmag + ' mag': 'N/A'}</p></div>
+                    <div className="col-md-3">G-band (Gaia) Unc. :<p className="text-warning">{planetDetails.gaia_gmagerr ? planetDetails.gaia_gmagerr + ' mag' : 'N/A'}</p></div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3">Gaia Distance [pc]</div>
-                    <div className="col-md-3">Upper Unc. [pc]</div>
-                    <div className="col-md-3">Lower Unc. [pc]</div>
-                    <div className="col-md-3">Limit Flag</div>
+                    <div className="col-md-3">Effective Temperature :<p className="text-warning">{getFormatedRangeField(planetDetails.st_teff, planetDetails.st_tefferr1, planetDetails.st_tefferr2,'K')}</p></div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3">Optical Magnitude [mag]</div>
-                    <div className="col-md-3">Unc. [mag]</div>
-                    <div className="col-md-3">Band</div>
-                    <div className="col-md-3">Limit Flag</div>
-                </div>
-                <div className="row">
-                    <div className="col-md-4">G-band (Gaia) [mag]</div>
-                    <div className="col-md-4">Unc. [mag]</div>
-                    <div className="col-md-4">Limit Flag</div>
-                </div>
-                <div className="row">
-                    <div className="col-md-3">Effective Temperature [K]</div>
-                    <div className="col-md-3">Upper Unc. [K]</div>
-                    <div className="col-md-3">Lower Unc. [K]</div>
-                    <div className="col-md-3">Limit Flag</div>
+                    <div className="col-md-2">
+                        <button type="button" class="btn btn-primary" onClick={closeDetails}>Close</button>
+                    </div>
                 </div>
             </div>
         </div>

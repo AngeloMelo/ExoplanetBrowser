@@ -10,7 +10,7 @@ const cron = require('node-cron');
 const ReloadDbTask = require('./tasks/reloadDbTask')
 
 const app = express();
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 
 const dbUrl = require('./config/keys').mongoURI;
 
@@ -24,16 +24,12 @@ app.use('/api/facilites', facilityRoutes);
 app.use('/api/hosts', hostRoutes);
 app.use('/api/planets', planetRoutes);
 
-
-// if(process.env.NODE_ENV === 'production')
-// {
-	app.use(express.static('frontend/build'));
-	app.get('*', (req, res)=>{
-		res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-	});
-// }
+app.use(express.static('frontend/build'));
+app.get('*', (req, res)=>{
+	res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+});
 	
-//cron.schedule('* * * * *', ReloadDbTask);
+cron.schedule('* * * *', ReloadDbTask);
 
 const port = process.env.PORT || 5000;
 

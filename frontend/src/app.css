@@ -13,3 +13,21 @@
 .pagination-item-active{
     background-color: #3498db;
 }
+
+.superscript {
+    position: absolute;
+    font-size: 75%;
+    float: right;
+    line-height: 0.5;
+    margin-left: 0.3em;
+    margin-right: 0.8em;
+}
+
+.subscript {
+    position: relative;
+    top: 0.4em;
+    font-size: 75%;
+    line-height: 0.5;
+    margin-left: 0.55em;
+    margin-right: 0.8em;
+}

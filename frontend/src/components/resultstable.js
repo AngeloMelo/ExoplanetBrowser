@@ -1,8 +1,9 @@
 import React from 'react'
 
-const ResultsTable = ({planetsData}) => {
+const ResultsTable = ({planetsData, showDetails}) => {
     
     const rows = planetsData.map((data,i) =>{
+        
         const rowUpdate = new Date(data.rowupdate).toLocaleDateString();
         return (
             <tr className="table-primary" key={i}>                
@@ -13,6 +14,7 @@ const ResultsTable = ({planetsData}) => {
                 <td>{data.st_dist}</td>                
                 <td>{data.pl_facility}</td>
                 <td>{rowUpdate}</td>
+                <td><button type="button" className="btn btn-info" onClick={() => showDetails(data._id)}>Details</button></td>
             </tr>
         )
     })
@@ -28,6 +30,7 @@ const ResultsTable = ({planetsData}) => {
                     <th scope="col">Distance [pc]</th>
                     <th scope="col">Discovery Facility</th>
                     <th scope="col">Last Update</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>                

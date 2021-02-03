@@ -60,11 +60,12 @@ const SearchForm = ({
                             </div>
                             <div className="row">
                                 <div className="col-md-1">
-                                    <button type="button" className="btn btn-outline-primary" onClick={clearAction}>Clear</button>
-                                </div>
-                                <div className="col-md-1">
                                     <button type="button" className="btn btn-outline-success" onClick={searchAction}>Search</button>
                                 </div>
+                                <div className="col-md-1">
+                                    <button type="button" className="btn btn-outline-primary" onClick={clearAction}>Clear</button>
+                                </div>
+                                
                             </div>
                         </fieldset>
                     </form>

@@ -2,6 +2,7 @@ import Navbar from './components/navbar'
 import SearchForm from './components/searchform'
 import Results from './components/results'
 import DetailsContainer from './components/detailscontainer'
+
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
@@ -13,6 +14,7 @@ function App() {
   const [hosts, setHosts] = useState([])
   const [loading, setLoading] = useState(false)
   const [queryValid, setQueryValid] = useState(true)
+  const [planetDetails, setPlanetDetails] = useState(null)
    
   const facilityInputRef = useRef(null)
   const hostInputRef = useRef(null)
@@ -80,10 +82,25 @@ function App() {
   const clear = () =>{
 
     setPlanetsData([])
+    setPlanetDetails(null)
+
     hostInputRef.current.value = ''
     facilityInputRef.current.value = ''
     methodInputRef.current.value = ''
     setQueryValid(true)
+
+  }
+
+  const showDetails = async (id) =>{
+
+    const planetResp = await axios.get(`/api/planets/${id}`)
+    const { data } = planetResp
+    setPlanetDetails(data)
+  }
+
+  const closeDetails = (ev) => {
+    ev.preventDefault()
+    setPlanetDetails(null)
   }
 
   const validQuery = (hostName, facility, method) =>{
@@ -111,8 +128,8 @@ function App() {
           searchAction={search}
         />
         <div className="row section">
-        { !queryValid ? emptyQueryWarning : <Results planetsData={planetsData}/>}
-        <DetailsContainer/>  
+        { !queryValid ? emptyQueryWarning : <Results planetsData={planetsData} showDetails={showDetails}/>}
+        { planetDetails && <DetailsContainer planetDetails={planetDetails} closeDetails={closeDetails}/>  }
         </div>
       </div>
     </>

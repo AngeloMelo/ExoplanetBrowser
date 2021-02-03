@@ -2,8 +2,7 @@ import { useState } from 'react'
 import ResultsTable from './resultstable'
 import ResultsPagination from './resultspagination'
 
-const Results = ({planetsData}) => {
-
+const Results = ({planetsData, showDetails}) => {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [pageSize] = useState(30)
@@ -17,7 +16,7 @@ const Results = ({planetsData}) => {
 
     return (
         <div className="container section">
-            <ResultsTable planetsData={currentPageData} />
+            <ResultsTable planetsData={currentPageData} showDetails={showDetails} />
             <div>
                 <div className="d-flex align-items-center justify-content-center">
                     <ResultsPagination 
