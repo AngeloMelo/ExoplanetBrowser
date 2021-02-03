@@ -13,9 +13,13 @@ This is an app suggestion from [App Ideas](https://github.com/florinpop17/app-id
 Create a MongoDB database called 'exoplanets' or edit the connection string on config/keys.js file
 
 npm install
+
 cd ./frontend
+
 npm install
+
 cd . ./
+
 npm run dev
 
 ### 3rd party documentation
