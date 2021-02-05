@@ -9,7 +9,7 @@
     "client": "npm start --prefix frontend",
     "dep": "yarn && yarn start && yarn --prefix frontend && yarn run build --prefix frontend",
     "dev": "concurrently \" npm run startdev\" \"npm run client\"", 
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build -- prefix frontend"
   },
   "author": "Angelo Melo",
   "license": "MIT",
