@@ -16,14 +16,16 @@ let dbUrl = require('./config/keys').mongoURI
 
 if(process.env.NODE_ENV ===	'production' )
 {
-	process.env.DATABASE_URL
+	console.log('Production mode')
+	dbUrl = process.env.DATABASE_URL
+	console.log(`DBurl: ${dbUrl}`)
 }
 
 
 mongoose
 	.connect(dbUrl,{useNewUrlParser: true, useUnifiedTopology: true})
 	.then(()=> console.log('mongoDb connected.'))
-	.catch(err => console.log(err))
+	.catch(err => console.log(`Error during DB connection: ${err}`))
 
 app.use('/api/discmethods', discMethodRoutes)
 app.use('/api/facilites', facilityRoutes)
@@ -39,7 +41,7 @@ if(process.env.NODE_ENV ===	'production' )
 	})
 }	
 
-cron.schedule('*/10 * * * *', ReloadDbTask)
+cron.schedule('*/50 * * * *', ReloadDbTask)
 
 const port = process.env.PORT || 5000
 
