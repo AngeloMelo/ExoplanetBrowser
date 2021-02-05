@@ -24,11 +24,14 @@ app.use('/api/facilites', facilityRoutes);
 app.use('/api/hosts', hostRoutes);
 app.use('/api/planets', planetRoutes);
 
-app.use(express.static('frontend/build'));
-app.get('*', (req, res)=>{
-	res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-});
-	
+if(process.env.NODE_ENV ===	'production' )
+{
+	app.use(express.static('frontend/build'));
+	app.get('*', (req, res)=>{
+		res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+	});
+}	
+
 cron.schedule('* * * *', ReloadDbTask);
 
 const port = process.env.PORT || 5000;
