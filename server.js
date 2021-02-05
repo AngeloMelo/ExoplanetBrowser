@@ -16,11 +16,12 @@ let dbUrl = require('./config/keys').mongoURI
 
 if(process.env.NODE_ENV ===	'production' )
 {
-	dbUrl = process.env.DATABASE_URL
+	process.env.DATABASE_URL
 }
 
+
 mongoose
-	.connect(dbUrl,{useNewUrlParser: true})
+	.connect(dbUrl,{useNewUrlParser: true, useUnifiedTopology: true})
 	.then(()=> console.log('mongoDb connected.'))
 	.catch(err => console.log(err))
 
@@ -38,7 +39,7 @@ if(process.env.NODE_ENV ===	'production' )
 	})
 }	
 
-cron.schedule('* * * *', ReloadDbTask)
+cron.schedule('*/10 * * * *', ReloadDbTask)
 
 const port = process.env.PORT || 5000
 

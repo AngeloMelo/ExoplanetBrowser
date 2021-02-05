@@ -12,7 +12,7 @@ function App() {
   const [facilities, setFacilities] = useState([])
   const [discoveryMethods, setDiscoveryMethods] = useState([])
   const [hosts, setHosts] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [, setLoading] = useState(false)
   const [queryValid, setQueryValid] = useState(true)
   const [planetDetails, setPlanetDetails] = useState(null)
    

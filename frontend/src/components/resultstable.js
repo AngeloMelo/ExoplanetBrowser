@@ -9,7 +9,7 @@ const ResultsTable = ({planetsData, showDetails}) => {
             <tr className="table-primary" key={i}>                
                 <td>{data.pl_hostname}</td>
                 <td>{data.pl_letter}</td>
-                <td><a href={`https://exoplanetarchive.ipac.caltech.edu/overview/${data.pl_name}`} target="_blank">{data.pl_name}</a></td>
+                <td><a href={`https://exoplanetarchive.ipac.caltech.edu/overview/${data.pl_name}`} target="_blank" rel="noreferrer">{data.pl_name}</a></td>
                 <td>{data.pl_discmethod}</td>
                 <td>{data.st_dist}</td>                
                 <td>{data.pl_facility}</td>
