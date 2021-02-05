@@ -76,13 +76,17 @@ const savePlanetData = (planetsData) =>{
   
 
 const createLog = () =>{
-    const message = 'reloading exoplanets database'
-    
-    const newLog = new ReloadLog({
-        log : message
-    });
 
-    newLog.save().then(report => console.log(message))
+    ReloadLog.deleteMany({}, ()=>{
+        
+        const message = 'reloading exoplanets database'
+        
+        const newLog = new ReloadLog({
+            log : message
+        })
+        
+        newLog.save().then(log => console.log(message))
+    })    
 }
 
 const fetchNasaApiData = async () =>{
