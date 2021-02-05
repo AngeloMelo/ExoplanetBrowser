@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const PlanetDataSchema = mongoose.Schema({
     pl_hostname : {
@@ -329,10 +329,10 @@ const PlanetDataSchema = mongoose.Schema({
         type : String,
         required: true
     }
-});
+})
 
-const PlanetData = module.exports = mongoose.model('planetdata', PlanetDataSchema);
+const PlanetData = module.exports = mongoose.model('planetdata', PlanetDataSchema)
 
 module.exports.getPlanetData = function(callback, limit){
-    PlanetData.find(callback).limit(limit);
+    PlanetData.find(callback).limit(limit)
 }
