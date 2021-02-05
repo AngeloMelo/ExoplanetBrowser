@@ -18,7 +18,6 @@ if(process.env.NODE_ENV ===	'production' )
 {
 	console.log('Production mode')
 	dbUrl = process.env.DATABASE_URL
-	console.log(`DBurl: ${dbUrl}`)
 }
 
 
