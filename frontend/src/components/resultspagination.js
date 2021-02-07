@@ -26,18 +26,18 @@ const ResultsPagination = ({pageSize, totalItems, current, paginate}) => {
         .slice(startIdx, startIdx + subPageSize)
         .map( (cur, i) => (
             <li className={current === cur ? 'o-page-item page-item active' : 'o-page-item page-item'} key={i}>
-                <a className="page-link" href='#' key={i} onClick={(ev) => {ev.preventDefault(); paginate(cur) } }>{cur}</a>
+                <a className="page-link" href='\#' key={i} onClick={(ev) => {ev.preventDefault(); paginate(cur) } }>{cur}</a>
             </li>
         ))
 
     return (
             <ul className="pagination pagination-sm">
                 <li className={startIdx === 0 ? 'page-item disabled': 'page-item'}>
-                    <a className="page-link" href="#" onClick={(ev) => {ev.preventDefault(); moveLeft() } } >&laquo;</a>
+                    <a className="page-link" href="\#" onClick={(ev) => {ev.preventDefault(); moveLeft() } } >&laquo;</a>
                 </li>
                 { pageButtons }
                 <li className={startIdx + subPageSize >= pages.length ? 'page-item disabled': 'page-item'}>
-                    <a class="page-link" href="#" onClick={(ev) => {ev.preventDefault(); moveRight() } } >&raquo;</a>
+                    <a class="page-link" href="\#" onClick={(ev) => {ev.preventDefault(); moveRight() } } >&raquo;</a>
                 </li>
             </ul>
     )
