@@ -25,6 +25,7 @@ npm run dev
 ### 3rd party documentation
 
 [NASA Exoplanet Archive API](https://exoplanetarchive.ipac.caltech.edu/index.html) 
+
 [node-cron](https://www.npmjs.com/package/cron)
 
 ### Requirements & Constraints
