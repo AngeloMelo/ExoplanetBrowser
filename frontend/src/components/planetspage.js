@@ -1,7 +1,5 @@
 import SearchForm from './searchform'
 import Results from './results'
-import DetailsContainer from './detailscontainer'
-
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
@@ -14,7 +12,6 @@ function PlanetsPage() {
   const [hosts, setHosts] = useState([])
   const [, setLoading] = useState(false)
   const [queryValid, setQueryValid] = useState(true)
-  const [planetDetails, setPlanetDetails] = useState(null)
    
   const facilityInputRef = useRef(null)
   const hostInputRef = useRef(null)
@@ -81,25 +78,12 @@ function PlanetsPage() {
   const clear = () =>{
 
     setPlanetsData([])
-    setPlanetDetails(null)
 
     hostInputRef.current.value = ''
     facilityInputRef.current.value = ''
     methodInputRef.current.value = ''
     setQueryValid(true)
 
-  }
-
-  const showDetails = async (id) =>{
-
-    const planetResp = await axios.get(`/api/planets/${id}`)
-    const { data } = planetResp
-    setPlanetDetails(data)
-  }
-
-  const closeDetails = (ev) => {
-    ev.preventDefault()
-    setPlanetDetails(null)
   }
 
   const validQuery = (hostName, facility, method) =>{
@@ -127,8 +111,7 @@ function PlanetsPage() {
 
       <div className="row section">
       
-      { !queryValid ? emptyQueryWarning : <Results planetsData={planetsData} showDetails={showDetails}/>}
-      { planetDetails && <DetailsContainer planetDetails={planetDetails} closeDetails={closeDetails}/>  }
+      { !queryValid ? emptyQueryWarning : <Results planetsData={planetsData} />}
       
       </div>
     </>

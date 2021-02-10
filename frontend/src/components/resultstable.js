@@ -1,6 +1,4 @@
-import React from 'react'
-
-const ResultsTable = ({planetsData, showDetails}) => {
+const ResultsTable = ({planetsData, setPlanetID}) => {
     
     const rows = planetsData.map((data,i) =>{
         
@@ -14,7 +12,7 @@ const ResultsTable = ({planetsData, showDetails}) => {
                 <td>{data.st_dist}</td>                
                 <td>{data.pl_facility}</td>
                 <td>{rowUpdate}</td>
-                <td><button type="button" className="btn btn-info" onClick={() => showDetails(data._id)}>Details</button></td>
+                <td><button type="button" className="btn btn-info" onClick={() => setPlanetID(data._id)}>Details</button></td>
             </tr>
         )
     })

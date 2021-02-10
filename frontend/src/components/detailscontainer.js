@@ -1,6 +1,4 @@
-import React from 'react'
-
-const DetailsContainer = ({planetDetails, closeDetails}) => {
+const DetailsContainer = ({planetDetails}) => {
     
     const getFormatedRangeField = (fieldValue, upperValue, lowerValue, unit) =>{
         
@@ -21,8 +19,7 @@ const DetailsContainer = ({planetDetails, closeDetails}) => {
     const isKepler = planetDetails.pl_kepflag === 1
     const isK2 = planetDetails.pl_k2flag === 1
     return (
-        <div className="container section">
-            <div className="jumbotron">
+            <>
                 <legend><p className="text-success">General details</p></legend>
                 <div className="row">
                     <div className="col-md-4">Host Name: <p className="text-success">{planetDetails.pl_hostname}</p></div>
@@ -88,13 +85,7 @@ const DetailsContainer = ({planetDetails, closeDetails}) => {
                 <div className="row">
                     <div className="col-md-3">Effective Temperature :<p className="text-warning">{getFormatedRangeField(planetDetails.st_teff, planetDetails.st_tefferr1, planetDetails.st_tefferr2,'K')}</p></div>
                 </div>
-                <div className="row">
-                    <div className="col-md-2">
-                        <button type="button" class="btn btn-primary" onClick={closeDetails}>Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </>
     )
 }
 

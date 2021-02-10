@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import ResultsTable from './resultstable'
 import ResultsPagination from './resultspagination'
+import DetailsModal from './detailsmodal'
 
-const Results = ({planetsData, showDetails}) => {
+const Results = ({planetsData}) => {
 
     const [currentPage, setCurrentPage] = useState(1)
+    const [planetID, setPlanetID] = useState(null)
     const [pageSize] = useState(30)
     const totalItems = planetsData.length 
     const lastIndex = currentPage * pageSize 
@@ -16,7 +18,7 @@ const Results = ({planetsData, showDetails}) => {
 
     return (
         <div className="container section">
-            <ResultsTable planetsData={currentPageData} showDetails={showDetails} />
+            <ResultsTable planetsData={currentPageData} setPlanetID={setPlanetID} />
             <div>
                 <div className="d-flex align-items-center justify-content-center">
                     <ResultsPagination 
@@ -26,7 +28,8 @@ const Results = ({planetsData, showDetails}) => {
                         paginate={paginate}
                     />
                 </div>    
-            </div>            
+            </div>  
+            <DetailsModal planetId={planetID} />          
         </div>
             
     )

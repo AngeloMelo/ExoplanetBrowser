@@ -31,3 +31,8 @@
     margin-left: 0.55em;
     margin-right: 0.8em;
 }
+
+.modal-90w {
+    width: 80%;
+    max-width: none!important;
+}
